@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Heart, Star } from "lucide-react";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 export default function ProductCatalog() {
   const [products, setProducts] = useState([]);
@@ -118,65 +119,91 @@ export default function ProductCatalog() {
                 />
               ))
             : paginatedProducts.map((product) => (
-                <div
-                  key={product.id}
-                  className="relative overflow-hidden transition border rounded-lg shadow-md group hover:shadow-lg"
-                >
-                  <div className="relative">
-                    <img
-                      src={product.thumbnail}
-                      alt={product.title}
-                      className="object-contain w-full h-48 transition-transform group-hover:scale-105"
-                    />
-                    <button className="absolute p-2 bg-white rounded-full shadow top-2 right-2 hover:bg-gray-100">
-                      <Heart size={18} className="text-gray-600" />
-                    </button>
-                  </div>
-
-                  <div className="p-4 transition group-hover:bg-gray-100">
-                    <h2 className="font-semibold group-hover:text-green-600">
-                      {product.title}
-                    </h2>
-                    <p className="text-sm text-gray-500">{product.category}</p>
-
-                    <div className="flex items-center mt-1 space-x-1">
-                      {Array.from({ length: 5 }, (_, i) => (
-                        <Star
-                          key={i}
-                          size={14}
-                          className={
-                            i < Math.round(product.rating)
-                              ? "text-yellow-400"
-                              : "text-gray-300"
-                          }
-                        />
-                      ))}
-                      <span className="text-xs text-gray-500">
-                        ({product.rating.toFixed(1)})
-                      </span>
+                <Link to={`/products/${product.id}`} key={product.id}>
+                  <div
+                    key={product.id}
+                    className="relative overflow-hidden transition border rounded-lg shadow-md group hover:shadow-lg"
+                  >
+                    <div className="relative">
+                      <img
+                        src={product.thumbnail}
+                        alt={product.title}
+                        className="object-contain w-full h-48 transition-transform group-hover:scale-105"
+                      />
+                      <button className="absolute p-2 bg-white rounded-full shadow top-2 right-2 hover:bg-gray-100">
+                        <Heart size={18} className="text-gray-600" />
+                      </button>
                     </div>
 
-                    {/* Harga */}
-                    <p className="mt-1 text-lg font-bold">${product.price}</p>
-                  </div>
+                    <div className="p-4 transition group-hover:bg-gray-100">
+                      <h2 className="font-semibold group-hover:text-green-600">
+                        {product.title}
+                      </h2>
+                      <p className="text-sm text-gray-500">
+                        {product.category}
+                      </p>
 
-                  {/* Tombol Add to Cart (Muncul saat hover) */}
-                  <Button className="absolute text-white transition-all duration-300 transform -translate-x-1/2 bg-green-600 opacity-0 bottom-4 left-3/4 group-hover:opacity-100 hover:bg-green-700">
-                    Add to Cart
-                  </Button>
-                </div>
+                      <div className="flex items-center mt-1 space-x-1">
+                        {Array.from({ length: 5 }, (_, i) => (
+                          <Star
+                            key={i}
+                            size={14}
+                            className={
+                              i < Math.round(product.rating)
+                                ? "text-yellow-400"
+                                : "text-gray-300"
+                            }
+                          />
+                        ))}
+                        <span className="text-xs text-gray-500">
+                          ({product.rating.toFixed(1)})
+                        </span>
+                      </div>
+
+                      {/* Harga */}
+                      <p className="mt-1 text-lg font-bold">${product.price}</p>
+                    </div>
+
+                    {/* Tombol Add to Cart (Muncul saat hover) */}
+                    <Button className="absolute text-white transition-all duration-300 transform -translate-x-1/2 bg-green-600 opacity-0 bottom-4 left-3/4 group-hover:opacity-100 hover:bg-green-700">
+                      Add to Cart
+                    </Button>
+                  </div>
+                </Link>
               ))}
         </div>
 
-        <div className="flex justify-center gap-2 mt-6">
+        <div className="flex items-center justify-between mt-6">
+          {/* Tombol Previous di Kiri */}
           <Button
             disabled={page === 1}
             onClick={() => setPage(page - 1)}
             variant="outline"
           >
-            Prev
+            Previous
           </Button>
-          <span className="px-4 py-2 border rounded-md">{page}</span>
+
+          {/* Nomor Halaman di Tengah */}
+          <div className="flex items-center gap-2">
+            {Array.from(
+              { length: Math.ceil(filteredProducts.length / perPage) },
+              (_, i) => (
+                <button
+                  key={i + 1}
+                  onClick={() => setPage(i + 1)}
+                  className={`px-4 py-2 border rounded-md ${
+                    page === i + 1
+                      ? "bg-blue-500 text-white"
+                      : "bg-white text-black"
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              )
+            )}
+          </div>
+
+          {/* Tombol Next di Kanan */}
           <Button
             disabled={
               page * perPage >= filteredProducts.length ||
@@ -185,7 +212,7 @@ export default function ProductCatalog() {
             onClick={() => setPage(page + 1)}
             variant="outline"
           >
-            Next
+            Next Page
           </Button>
         </div>
       </div>

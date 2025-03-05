@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
 import ProductCatalog from "./pages/Categories";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import ProductDetail from "./pages/Product ID";
 
 /* Daftar Tugas Anda */
 /*
@@ -28,27 +28,15 @@ import ProductCatalog from "./pages/Categories";
 /* URL Dokumentasi API : https://dummyjson.com/docs/products */
 /* URL Desain User Interface : https://cdn.dribbble.com/userupload/10414553/file/original-2d905d116a30699e9bb1bf0e30df9ac2.png?resize=752x3593&vertical=center */
 
-export default function App() {
-  const [productData, setProductData] = useState([]);
-
-  const getProductData = async () => {
-    fetch("https://dummyjson.com/products")
-      .then((res) => res.json())
-      .then((result) => {
-        setProductData(result.products);
-      });
-  };
-
-  console.log({ productData });
-
-  useEffect(() => {
-    getProductData();
-    return () => {};
-  }, []);
-
+function App() {
   return (
-    <main>
-      <ProductCatalog />
-    </main>
+    <Router>
+      <Routes>
+        <Route path="/" element={<ProductCatalog />} />
+        <Route path="/products/:id" element={<ProductDetail />} />
+      </Routes>
+    </Router>
   );
 }
+
+export default App;
