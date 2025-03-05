@@ -161,7 +161,17 @@ export default function ProductCatalog() {
                       </div>
 
                       {/* Harga */}
-                      <p className="mt-1 text-lg font-bold">${product.price}</p>
+                      <p className="mt-1 text-lg font-bold text-green-600">
+                        ${" "}
+                        {(
+                          product.price -
+                          (product.price * product.discountPercentage) / 100
+                        ).toFixed(2)}
+                        <span className="ml-2 text-gray-500 line-through">
+                          ${product.price}
+                        </span>
+                      </p>
+                      {/* "mt-1 text-lg font-bold" */}
                     </div>
 
                     {/* Tombol Add to Cart (Muncul saat hover) */}
