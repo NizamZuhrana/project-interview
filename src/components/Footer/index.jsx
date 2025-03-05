@@ -2,16 +2,12 @@ export default function Footer() {
     return (
       <footer className="text-gray-300 bg-gray-900">
         <div className="container grid gap-8 px-6 py-10 mx-auto md:grid-cols-5">
-          
-          {/* Kolom 1 - Logo & Deskripsi */}
           <div>
             <h2 className="text-2xl font-bold text-white">Shopx</h2>
             <p className="mt-2 text-sm">
               Belanja mudah dan nyaman dengan berbagai pilihan produk terbaik untukmu.
             </p>
           </div>
-  
-          {/* Kolom 2 - Links */}
           <div>
             <h3 className="mb-3 text-lg font-semibold text-white">About Us</h3>
             <ul className="space-y-2 text-sm">
@@ -23,8 +19,6 @@ export default function Footer() {
               <li><a href="#" className="hover:text-green-400">LIve Station</a></li>
             </ul>
           </div>
-  
-          {/* Kolom 3 - Support */}
           <div>
             <h3 className="mb-3 text-lg font-semibold text-white">Help</h3>
             <ul className="space-y-2 text-sm">
@@ -36,7 +30,6 @@ export default function Footer() {
               <li><a href="#" className="hover:text-green-400">Contact Us</a></li>
             </ul>
           </div>
-
           <div>
             <h3 className="mb-3 text-lg font-semibold text-white">Help</h3>
             <ul className="space-y-2 text-sm">
@@ -45,8 +38,6 @@ export default function Footer() {
               <li><a href="#" className="hover:text-green-400">Coupons</a></li>
             </ul>
           </div>
-  
-          {/* Kolom 4 - Newsletter */}
           <div>
             <h3 className="mb-3 text-lg font-semibold text-white">Newsletter</h3>
             <p className="text-sm">Dapatkan promo menarik langsung di email kamu!</p>
@@ -62,8 +53,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-  
-        {/* Copyright */}
         <div className="grid py-4 text-center border-t border-gray-700 md:grid-cols-2">
           <p className="text-sm">&copy; {new Date().getFullYear()} Shopx. All rights reserved.</p>
           <p className="text-sm">Privacy Policy | Terms & Conditions</p>

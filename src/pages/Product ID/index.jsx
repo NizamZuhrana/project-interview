@@ -34,7 +34,6 @@ export default function ProductDetail() {
       <Navbar />
       <div className="p-6">
         <div className="container grid grid-cols-1 gap-8 mx-auto mt-20 md:grid-cols-2">
-          {/* Product Image Carousel */}
           <div>
             <img
               src={product.images[currentImage]}
@@ -57,8 +56,6 @@ export default function ProductDetail() {
               ))}
             </div>
           </div>
-
-          {/* Product Details */}
           <div>
             <h1 className="text-3xl font-bold">{product.title}</h1>
             <p className="mb-4 text-lg text-gray-500">{product.category}</p>
@@ -69,7 +66,7 @@ export default function ProductDetail() {
                   size={18}
                   className={
                     i < Math.round(product.rating)
-                      ? "text-yellow-400"
+                      ? "text-yellow-600"
                       : "text-gray-300"
                   }
                 />
@@ -96,8 +93,6 @@ export default function ProductDetail() {
               Warranty: {product.warrantyInformation}
             </p>
             <p className="mb-6 text-gray-700">{product.description}</p>
-
-            {/* Action Buttons */}
             <div className="flex space-x-4">
               <Button className="bg-green-600 hover:bg-green-700">
                 Add to Cart
@@ -109,8 +104,6 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
-
-        {/* Product Reviews */}
         <div className="mt-10">
           <h2 className="text-2xl font-semibold">Customer Reviews</h2>
           <div className="max-w-xl mt-4 ">

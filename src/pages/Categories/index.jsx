@@ -109,7 +109,6 @@ export default function ProductCatalog() {
             </Button>
           </div>
         </div>
-
         <div className="grid grid-cols-2 gap-6 mt-10 md:grid-cols-4">
           {loading
             ? [...Array(12)].map((_, index) => (
@@ -134,7 +133,6 @@ export default function ProductCatalog() {
                         <Heart size={18} className="text-gray-600" />
                       </button>
                     </div>
-
                     <div className="p-4 transition group-hover:bg-gray-100">
                       <h2 className="font-semibold group-hover:text-green-600">
                         {product.title}
@@ -142,7 +140,6 @@ export default function ProductCatalog() {
                       <p className="text-sm text-gray-500">
                         {product.category}
                       </p>
-
                       <div className="flex items-center mt-1 space-x-1">
                         {Array.from({ length: 5 }, (_, i) => (
                           <Star
@@ -159,8 +156,6 @@ export default function ProductCatalog() {
                           ({product.rating.toFixed(1)})
                         </span>
                       </div>
-
-                      {/* Harga */}
                       <p className="mt-1 text-lg font-bold text-green-600">
                         ${" "}
                         {(
@@ -171,10 +166,7 @@ export default function ProductCatalog() {
                           ${product.price}
                         </span>
                       </p>
-                      {/* "mt-1 text-lg font-bold" */}
                     </div>
-
-                    {/* Tombol Add to Cart (Muncul saat hover) */}
                     <Button className="absolute text-white transition-all duration-300 transform -translate-x-1/2 bg-green-600 opacity-0 bottom-4 left-3/4 group-hover:opacity-100 hover:bg-green-700">
                       Add to Cart
                     </Button>
@@ -184,7 +176,6 @@ export default function ProductCatalog() {
         </div>
 
         <div className="flex items-center justify-between mt-6">
-          {/* Tombol Previous di Kiri */}
           <Button
             disabled={page === 1}
             onClick={() => setPage(page - 1)}
@@ -192,8 +183,6 @@ export default function ProductCatalog() {
           >
             Previous
           </Button>
-
-          {/* Nomor Halaman di Tengah */}
           <div className="flex items-center gap-2">
             {Array.from(
               { length: Math.ceil(filteredProducts.length / perPage) },
@@ -212,8 +201,6 @@ export default function ProductCatalog() {
               )
             )}
           </div>
-
-          {/* Tombol Next di Kanan */}
           <Button
             disabled={
               page * perPage >= filteredProducts.length ||

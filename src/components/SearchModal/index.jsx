@@ -13,8 +13,6 @@ export default function SearchModal({ isOpen, onClose }) {
       try {
         const res = await fetch("https://dummyjson.com/products");
         const data = await res.json();
-
-        // Ambil trending searches berdasarkan rating tertinggi
         const trending = data.products
           .sort((a, b) => b.rating - a.rating)
           .slice(0, 5)
@@ -23,13 +21,10 @@ export default function SearchModal({ isOpen, onClose }) {
             thumbnail: product.thumbnail,
             rating: product.rating
           }));
-
-        // Ambil trending collections berdasarkan kategori populer
         const categoryCount = data.products.reduce((acc, product) => {
           acc[product.category] = (acc[product.category] || 0) + 1;
           return acc;
         }, {});
-
         const trendingCategories = Object.keys(categoryCount)
           .sort((a, b) => categoryCount[b] - categoryCount[a])
           .slice(0, 5);
@@ -40,7 +35,6 @@ export default function SearchModal({ isOpen, onClose }) {
         console.error("Error fetching data:", error);
       }
     };
-
     fetchTrendingData();
   }, []);
 
@@ -65,15 +59,12 @@ export default function SearchModal({ isOpen, onClose }) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="w-full max-w-lg p-6 bg-white rounded-lg shadow-lg">
-        {/* Header */}
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-lg font-semibold">Search</h2>
           <button onClick={onClose} className="text-gray-600 hover:text-gray-800">
             <X size={20} />
           </button>
         </div>
-
-        {/* Search Form */}
         <form onSubmit={handleSubmit} className="relative mb-4">
           <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
           <Input
@@ -84,8 +75,6 @@ export default function SearchModal({ isOpen, onClose }) {
             className="pl-10"
           />
         </form>
-
-        {/* Recent Searches */}
         {recentSearches.length > 0 && (
           <div className="mb-4">
             <div className="flex items-center justify-between">
@@ -111,8 +100,6 @@ export default function SearchModal({ isOpen, onClose }) {
             </div>
           </div>
         )}
-
-        {/* Trending Searches (With Image & Rating) */}
         <div className="mb-4">
           <h3 className="mb-2 text-sm font-semibold text-gray-600">Trending Searches</h3>
           <div className="space-y-3">
@@ -138,8 +125,6 @@ export default function SearchModal({ isOpen, onClose }) {
             ))}
           </div>
         </div>
-
-        {/* Trending Collections */}
         <div>
           <h3 className="mb-2 text-sm font-semibold text-gray-600">Trending Collections</h3>
           <div className="flex flex-wrap gap-2">
